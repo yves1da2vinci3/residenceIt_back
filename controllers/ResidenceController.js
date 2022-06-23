@@ -26,8 +26,8 @@ const registerResidence = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Update Residence profile
-// @route   PUT /api/Residences/profile
+// @desc    Update Residence 
+// @route   PUT /api/Residences/:residenceId
 // @access  Private
 const updateResidence = asyncHandler(async (req, res) => {
   const residence = await Residence.findById(req.params.residenceId)
@@ -43,15 +43,20 @@ if(updatedVideo){
  // supprimer tout les liens
 if(updatedImage){
   // suppresion des liens 
-  deleteArraysIndex.forEach(elt => {
-    const index = NewArrayimageUrls.findIndex(elt => elt.Filereference === elt)
+  deleteArraysIndex.forEach(reference => {
+    const index = NewArrayimageUrls.findIndex(img => img.Filereference === reference)
     NewArrayimageUrls.splice(index,1)
   });
   // ajout des nouvelles valeurs
   NewArrayimageUrls = [...NewArrayimageUrls,...newImagesUrls]
-  residence.imageUrls = NewArrayimageUrls
+  // suppression des uplications
+let uniqueImgurls = [...new Set(NewArrayimageUrls)];
+
+
+  residence.imageUrls = uniqueImgurls
 }
 
+// maj des autres informations
   if (residence) {
     residence.Description = req.body.Description || residence.Description
     residence.Localisation = req.body.Localisation || residence.Localisation

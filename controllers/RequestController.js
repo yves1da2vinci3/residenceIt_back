@@ -106,9 +106,11 @@ const validateRequest = asyncHandler( async (req,res) =>{
 
 const DenyRequest = asyncHandler( async (req,res) =>{
     const request =  await Request.findById(req.params.id)
-
+    const user = await User.findById(request.userId)
+    user.isValidate = false
     request.requestStatus = 2
     try {
+        await user.save()
         await request.save()
  res.status(202).json({ message : 'requete refusée avec succés'})
     } catch (error) {
@@ -118,7 +120,7 @@ const DenyRequest = asyncHandler( async (req,res) =>{
  
 })
 const getRequests = asyncHandler( async (req,res) =>{
-    const requests =  await Request.find()
+    const requests =  await Request.find({}).sort({ createdAt : "desc"})
     
 res.json(requests)
 

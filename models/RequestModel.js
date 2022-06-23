@@ -10,7 +10,7 @@ const RequestSchema = mongoose.Schema(
     requestStatus: {
       type: Number,
       required: true,
-      default : 0
+      default : 1
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

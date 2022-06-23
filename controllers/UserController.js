@@ -11,20 +11,25 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ Email })
   if ((user) && ( await user.matchPassword(password))) {
-    res.status(201).json({
-      _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phoneNumber : user.phoneNumber,
-      Email: user.Email,
-      isAdmin: user.isAdmin,
-      sex : user.sex,
-      ResidenceId : user.ResidenceId,
-      birthDate : user.birthDate,
-      School : user.School,
-      token: generateToken(user._id),
-    })
-    req.user = user;
+    if(user.isValidate ){
+      res.status(201).json({
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber : user.phoneNumber,
+        Email: user.Email,
+        isAdmin: user.isAdmin,
+        sex : user.sex,
+        ResidenceId : user.ResidenceId,
+        birthDate : user.birthDate,
+        School : user.School,
+        token: generateToken(user._id),
+      })
+      req.user = user;
+    }else{
+      res.status(401).json({ message:" vous n ' avez pas encore l'accès a l'espace utilisateur   " })
+    }
+ 
   } else {
     res.status(401).json({ message:'Email ou mot de passe incorrect' })
   }
