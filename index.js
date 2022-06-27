@@ -12,7 +12,7 @@ import ResidencetRoutes from './routes/ResidenceRoutes.js'
 const app = express()
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin: ['https://residenceit.netlify.app/','https://www.residenceit.com/','http://192.168.1.6:3000'],
+    origin: "*",
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
     allowedHeaders: [
         'Content-Type',
