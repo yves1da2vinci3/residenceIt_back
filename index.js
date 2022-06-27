@@ -12,7 +12,7 @@ import ResidencetRoutes from './routes/ResidenceRoutes.js'
 const app = express()
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin: ['http://localhost:3000','http://192.168.1.6:3000'],
+    origin: ['https://www.residenceit.com/','http://192.168.1.6:3000'],
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
     allowedHeaders: [
         'Content-Type',
