@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler'
 import Message from '../models/MessageModel.js'
 import Request from '../models/RequestModel.js'
 import Residence from '../models/ResidenceModel.js'
-import User from '../models/userModel.js'
+import User from '../models/UserModel.js'
 
 // @desc    Register a new message
 // @route   POST /api/request
