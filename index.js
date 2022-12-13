@@ -43,7 +43,13 @@ app.use('/api/requests',RequestRoutes)
 
 
 // connection de la DB 
-ConnectDB()
+ConnectDB().then(success => {
+    app.listen(PORT,()=>{
+        console.log('express run effectly on port 5000')
+    })
+
+}
+    ).catch(err => console.log(err))
 
 
 
@@ -53,8 +59,3 @@ ConnectDB()
 
 
 
-
-
-app.listen(PORT,()=>{
-    console.log('express run effectly on port 5000')
-})
